@@ -1,0 +1,21 @@
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% block head_title %}{% trans "Profile" %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="meida">
+            <img class=" rounded-circle account-image" src="{{ user.profile.image.url }}">
+            <h1>{{ user.username }}</h1>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_update_form | crispy }}
+            {{ profile_update_form | crispy }}
+            <div class="form-group">
+                <button type="submit">{% trans "Update Profile" %}</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
